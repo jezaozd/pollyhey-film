@@ -2,6 +2,11 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var calm = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* requestAnimationFrame с запасным таймером: вкладка в фоне кадров не выдаёт */
+  function raf(fn) {
+    var done = false, run = function () { if (!done) { done = true; fn(); } };
+    requestAnimationFrame(run); setTimeout(run, 90);
+  }
 
   /* появление блоков и «раскрытие» фотографий */
   var io = new IntersectionObserver(function (es) {
@@ -31,7 +36,7 @@
       p.firstElementChild.style.transform = 'translate3d(0,' + (-c).toFixed(1) + 'px,0) scale(1.06)';
     });
   }
-  window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(frame); } }, { passive: true });
+  window.addEventListener('scroll', function () { if (!tick) { tick = true; raf(frame); } }, { passive: true });
   window.addEventListener('resize', frame);
   frame();
 
@@ -74,4 +79,54 @@
   dlg.addEventListener('close', function () { if (last) { last.focus({ preventScroll: true }); last = null; } });
   $('#dlgx').addEventListener('click', closeDlg);
   dlg.addEventListener('click', function (e) { if (e.target === dlg) closeDlg(); });
+
+  /* видео на первом экране: играет только пока его видно */
+  var hv = $('#hv');
+  if (hv) {
+    if (calm) { hv.removeAttribute('autoplay'); hv.pause(); }
+    else new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { var p = hv.play(); if (p && p.catch) p.catch(function () {}); } else hv.pause();
+      });
+    }, { threshold: 0.05 }).observe(hv);
+  }
+
+  /* финал: кадры её ухода листаются прокруткой */
+  var fin = $('.fin'), fc = $('#fc'), fbar = $('#fbar');
+  if (fin && fc) {
+    var N = 61, frames = new Array(N), started = false, shown = -1, ctx = fc.getContext('2d');
+    function src(i) { return 'img/fin/' + ('00' + i).slice(-3) + '.jpg'; }
+    function ok(im) { return im && im.complete && im.naturalWidth; }
+    function draw(i) {
+      var im = frames[i];
+      for (var k = 1; !ok(im) && k < N; k++) im = ok(frames[i - k]) ? frames[i - k] : frames[i + k];   /* ближайший готовый кадр */
+      if (ok(im)) { ctx.drawImage(im, 0, 0, fc.width, fc.height); shown = i; }
+    }
+    function scrub() {
+      var r = fin.getBoundingClientRect(), span = r.height - window.innerHeight;
+      var p = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+      var i = Math.round(p * (N - 1));
+      if (i !== shown) draw(i);
+      fin.dataset.phase = p < 0.34 ? 0 : p < 0.7 ? 1 : 2;
+      if (fbar) fbar.style.width = (p * 100).toFixed(1) + '%';
+    }
+    function load() {
+      if (started) return; started = true;
+      for (var i = 0; i < N; i++) (function (i) {
+        var im = new Image(); im.decoding = 'async';
+        im.onload = function () { if (shown < 0 || i === Math.round(shown)) { shown = -1; scrub(); } };
+        im.src = src(i); frames[i] = im;
+      })(i);
+    }
+    if (calm) { fin.classList.add('static'); frames[0] = new Image(); frames[0].onload = function () { draw(0); }; frames[0].src = src(0); }
+    else {
+      new IntersectionObserver(function (es) { if (es[0].isIntersecting) load(); }, { rootMargin: '150% 0px' }).observe(fin);
+      var ft = false;
+      window.addEventListener('scroll', function () {
+        if (ft) return; ft = true;
+        raf(function () { ft = false; if (started) scrub(); });
+      }, { passive: true });
+      window.addEventListener('resize', function () { if (started) scrub(); });
+    }
+  }
 })();

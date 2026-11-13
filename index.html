@@ -14,8 +14,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/e-hero.jpg" fetchpriority="high">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="preload" as="image" href="img/v-hero.jpg" fetchpriority="high">
+<link rel="stylesheet" href="style.css?v=5">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -45,12 +45,16 @@
 
 <!-- ═══════ I. ПАРАДНЫЙ ПОРТРЕТ ═══════ -->
 <section class="hero">
-  <div class="hero-ph" data-par=".06"><img src="img/e-hero.jpg" alt="Полина Подплетенная" width="1023" height="1281"></div>
-  <div class="hero-tx">
-    <h1><span class="m"><span class="a2">Полина</span></span><span class="m"><span class="a3">Подплетенная</span></span></h1>
-    <p class="hero-sub a4">Арт-директор. Сооснователь 2MOOD.<br>Мать Department of&nbsp;Aesthetics.</p>
-    <a class="scroll a5" href="#stats"><i></i><span class="cap">Листайте</span></a>
+  <div class="tri">
+    <div class="tp tp-l"><img src="img/e-hat.jpg" alt="" width="1080" height="1440"></div>
+    <div class="tp tp-c"><video id="hv" muted playsinline loop autoplay preload="auto" poster="img/v-hero.jpg" aria-label="Полина Подплетенная идёт навстречу камере"><source src="img/v-hero.mp4" type="video/mp4"></video></div>
+    <div class="tp tp-r"><img src="img/e-leo.jpg" alt="" width="1080" height="1440"></div>
   </div>
+  <div class="hero-tx">
+    <h1><span class="m"><span class="a2">Полина</span></span> <span class="m"><span class="a3">Подплетенная</span></span></h1>
+    <p class="hero-sub cap a4">Арт-директор<i></i>Сооснователь 2MOOD<i></i>Мать Department of&nbsp;Aesthetics</p>
+  </div>
+  <a class="scroll a5" href="#stats"><i></i><span class="cap">Листайте</span></a>
 </section>
 
 <ul class="stats" id="stats">
@@ -71,7 +75,7 @@
   <div class="bio-side">
     <p class="cap rv">I&ensp;—&ensp;Биография</p>
     <h2 class="rv">Путь</h2>
-    <figure class="ph un"><img loading="lazy" src="img/e-turban.jpg" alt="Полина Подплетенная"><figcaption class="cap">Ноябрь 2026</figcaption></figure>
+    <figure class="ph un"><img loading="lazy" src="img/e-hero.jpg" alt="Полина Подплетенная"><figcaption class="cap">Ноябрь 2026</figcaption></figure>
   </div>
   <ol class="chapters">
     <li class="rv"><span class="cap">Глава I</span><h3>От&nbsp;Забайкалья до&nbsp;Урюпинска</h3><p>Родилась в&nbsp;Москве, а&nbsp;выросла в&nbsp;разъездах по&nbsp;стране. Сама записывалась во&nbsp;все творческие кружки и&nbsp;зачитывала модные журналы.</p></li>
@@ -106,7 +110,7 @@
       <li class="rv"><b>26</b><span class="cap">магазинов к&nbsp;середине 2026</span></li>
     </ul>
   </div>
-  <figure class="ph un mood-ph"><img loading="lazy" src="img/e-fur.jpg" alt="Полина Подплетенная"><figcaption class="cap">Ноябрь 2026</figcaption></figure>
+  <figure class="ph un mood-ph"><img loading="lazy" src="img/e-turban.jpg" alt="Полина Подплетенная"><figcaption class="cap">Ноябрь 2026</figcaption></figure>
 </section>
 
 <!-- ═══════ IV. ГАЛЕРЕЯ ═══════ -->
@@ -232,17 +236,26 @@
   </ul>
 </section>
 
-<!-- ═══════ VI. АУДИЕНЦИЯ ═══════ -->
-<section class="aud" id="audience">
-  <figure class="ph un aud-ph"><img loading="lazy" src="img/e-back.jpg" alt="Полина Подплетенная"></figure>
-  <div class="aud-tx">
-    <p class="cap rv">V&ensp;—&ensp;Сотрудничество</p>
-    <h2 class="rv">Аудиенция</h2>
-    <div class="aud-list">
-      <article class="rv"><h3>Именная работа</h3><p>Коллаборация или реклама: совместный продукт, капсула, меню, запуск. Фото- или видеопост в&nbsp;Instagram* и&nbsp;Telegram.</p></article>
-      <article class="rv"><h3>Частная консультация</h3><p>Разбор ваших соцсетей, стратегия для бизнеса, концепции съёмок и&nbsp;запусков.</p></article>
+<!-- ═══════ VI. ФИНАЛ: ОНА УХОДИТ ═══════ -->
+<section class="fin" id="audience" data-phase="0">
+  <div class="fin-stage">
+    <div class="fin-film"><canvas id="fc" width="720" height="960" aria-label="Полина уходит вдоль стены в длинной шубе и шляпе"></canvas></div>
+    <div class="fin-tx">
+      <div class="fp fp-0">
+        <p class="cap">V&ensp;—&ensp;Сотрудничество</p>
+        <h2>Аудиенция</h2>
+        <p class="lead">Листайте медленно. Она не оборачивается.</p>
+      </div>
+      <div class="fp fp-1">
+        <article><h3>Именная работа</h3><p>Коллаборация или реклама: совместный продукт, капсула, меню, запуск. Фото- или видеопост в&nbsp;Instagram* и&nbsp;Telegram.</p></article>
+        <article><h3>Частная консультация</h3><p>Разбор ваших соцсетей, стратегия для бизнеса, концепции съёмок и&nbsp;запусков.</p></article>
+      </div>
+      <div class="fp fp-2">
+        <p class="fin-big">Успейте,<br><em>пока она здесь</em></p>
+        <a class="btn" href="https://t.me/lenalentc" target="_blank" rel="noopener"><span>Просить об&nbsp;аудиенции</span></a>
+      </div>
     </div>
-    <a class="btn rv" href="https://t.me/lenalentc" target="_blank" rel="noopener"><span>Просить об&nbsp;аудиенции</span></a>
+    <i class="fin-bar"><i id="fbar"></i></i>
   </div>
 </section>
 
@@ -257,7 +270,7 @@
     <div><h4 class="cap">Служба заботы</h4><a class="ul" href="https://t.me/ritariit" target="_blank" rel="noopener">+7 999 203 4747</a></div>
     <div><h4 class="cap">Instagram*</h4><a class="ul" href="https://instagram.com/pollyhey" target="_blank" rel="noopener">@pollyhey</a></div>
   </div>
-  <p class="ft-bot">ИП Подплетенная Полина Александровна · ИНН 772073715061<br>*Meta&nbsp;— запрещённая в&nbsp;РФ организация. Цифры Instagram&nbsp;— на&nbsp;ноябрь 2026&nbsp;года.<br>Концепт сайта, подготовленный для Полины. До&nbsp;согласования официальным сайтом не&nbsp;является.</p>
+  <p class="ft-bot">ИП Подплетенная Полина Александровна · ИНН 772073715061<br>*Meta&nbsp;— запрещённая в&nbsp;РФ организация. Цифры Instagram&nbsp;— на&nbsp;ноябрь 2026&nbsp;года.<br>Концепт сайта, подготовленный для Полины. До&nbsp;согласования официальным сайтом не&nbsp;является. Два видеофрагмента созданы нейросетью из&nbsp;её&nbsp;фотографий.</p>
 </footer>
 
 <dialog class="dlg" id="dlg" aria-label="Работа из галереи">
@@ -265,6 +278,6 @@
   <div class="dlg-in" id="dlgin"></div>
 </dialog>
 
-<script src="app.js?v=3" defer></script>
+<script src="app.js?v=5" defer></script>
 </body>
 </html>
