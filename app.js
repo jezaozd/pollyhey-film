@@ -71,6 +71,7 @@
     pl.addEventListener('click', function () {
       if (moved > 6) { moved = 0; return; }           /* это было перетаскивание, а не нажатие */
       last = pl; dlgin.innerHTML = d.innerHTML;
+      $$('img[data-src]', dlgin).forEach(function (im) { im.src = im.dataset.src; });
       if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
       dlg.scrollTop = 0;
     });
