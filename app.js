@@ -91,11 +91,27 @@
     }, { threshold: 0.05 }).observe(hv);
   }
 
+  /* боковые видео триптиха: только на широком экране и только после загрузки страницы */
+  var wide = window.matchMedia('(min-width:1000px)');
+  function sides() {
+    if (calm || !wide.matches) return;
+    $$('.sv').forEach(function (v, i) {
+      if (v.dataset.on || !v.dataset.src) return;
+      v.dataset.on = 1;
+      setTimeout(function () {
+        v.src = v.dataset.src; v.load();
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      }, 400 + i * 500);
+    });
+  }
+  if (document.readyState === 'complete') sides(); else window.addEventListener('load', sides);
+  if (wide.addEventListener) wide.addEventListener('change', sides);
+
   /* финал: кадры её ухода листаются прокруткой */
   var fin = $('.fin'), fc = $('#fc'), fbar = $('#fbar');
   if (fin && fc) {
     var N = 61, frames = new Array(N), started = false, shown = -1, ctx = fc.getContext('2d');
-    function src(i) { return 'img/fin/' + ('00' + i).slice(-3) + '.jpg'; }
+    function src(i) { return 'img/fin/' + ('00' + i).slice(-3) + '.webp'; }
     function ok(im) { return im && im.complete && im.naturalWidth; }
     function draw(i) {
       var im = frames[i];
